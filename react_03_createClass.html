@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ccc{
+            background-color: #00B7FF;
+        }
+    </style>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="wrap"></div>
+</body>
+<script type="text/babel">
+    var HelloMessage=React.createClass({
+        render:function () {
+            return (
+                    <div>
+                        <h1 className="ccc">Hello {this.props.name}</h1>
+                        <h2>password {this.props.password}</h2>
+                    </div>
+            )
+
+        }
+    })
+    ReactDOM.render(
+            <HelloMessage name="john" password="123"/>,
+            document.getElementById('wrap')
+    )
+
+    var NoteList=React.createClass({
+        render:function () {
+            return(
+                    <ul>
+                        {
+                           React.Children.map( this.props.children,function (name) {
+                               return <li>{name}</li>
+                           })
+                        }
+                    </ul>
+            )
+        }
+    })
+    ReactDOM.render(
+        <NoteList>
+            <span>hello</span>
+            <span>world</span>
+            <span>mars</span>
+        </NoteList>,
+        document.getElementById('wrap')
+    )
+
+</script>
+</html>

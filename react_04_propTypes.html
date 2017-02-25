@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="wrap"></div>
+</body>
+<script type="text/babel">
+    var HelloUser=React.createClass({
+        handleClick:function () {
+          this.refs.textInput.focus();
+        },
+        propTypes:{
+//            isRequired:代表要求此种属性必填
+            title:React.PropTypes.string
+        },
+        getDefaultProps:function () {
+            return{
+                title:"ok"
+            }
+        },
+        render:function () {
+            return(
+                    <div>
+                        {this.props.title}
+                        <input type="text" ref="textInput"/>
+                        <input type="button" value="聚焦" onClick={this.handleClick}/>
+                    </div>
+            )
+        }
+    })
+    ReactDOM.render(
+            <HelloUser title="pl"></HelloUser>,
+            document.getElementById('wrap')
+    )
+</script>
+</html>

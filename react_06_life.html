@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="wrap"></div>
+</body>
+<script src="js/jquery-1.12.3.js"></script>
+<script type="text/babel">
+    var HelloUser=React.createClass({
+        getInitialState:function () {
+            return {
+                opacity:1.0,
+                users:[]
+            };
+        },
+        componentWillMount:function () {
+            console.log("componentWillMount")
+        },
+        componentDidMount:function () {
+            console.log("componentDidMount");
+            this.timer=setInterval(function ( ) {
+                var opacity=this.state.opacity;
+                opacity-=0.05;
+                if(opacity<0.1){
+                    opacity=1;
+                }
+                this.setState({
+                    opacity:opacity
+                });
+
+            }.bind(this),100);
+            var _this=this;
+            $.ajax({
+                url:"http://localhost:9090/users",
+                dataType:"jsonp",
+                jsonp:"ccc",
+                success:function (data) {
+                    console.log(data);
+                    _this.setState({
+                        users:data
+                    })
+                }
+            })
+        },
+
+        render:function () {
+            return(
+                    <div style={{opacity:this.state.opacity}}>
+                        <h1>aloha</h1>
+                        <table>
+                            {
+                                this.state.users.map(function (user) {
+                                    return (<tr>
+                                            <td>{user.name}</td>
+                                            <td>{user.gender}</td>
+                                            <td>{user.age}</td>
+                                        </tr>)
+                                })
+                            }
+                        </table>
+                    </div>
+            )
+        }
+    })
+    ReactDOM.render(
+            <HelloUser></HelloUser>,
+            document.getElementById('wrap')
+    )
+</script>
+</html>

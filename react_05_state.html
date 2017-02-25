@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="wrap"></div>
+</body>
+<script type="text/babel">
+    var HelloUser=React.createClass({
+        getInitialState:function () {
+            return {
+                liked:false,
+                values:'hello'
+            };
+        },
+        changes:function (event) {
+            this.setState({
+                values:event.target.value
+            })
+        },
+        clicks:function () {
+            this.setState({
+                liked:!this.state.liked
+            })
+        },
+        render:function () {
+            var text=this.state.liked ? "喜欢":"不喜欢";
+            var value=this.state.values;
+            return(
+                    <div>
+                        <h1>你{text}他</h1>
+                        <button onClick={this.clicks}>点击切换</button>
+                        <p>{value}</p>
+                        <input type="text" onChange={this.changes}/>
+                    </div>
+            )
+        }
+    })
+    ReactDOM.render(
+            <HelloUser></HelloUser>,
+            document.getElementById('wrap')
+    )
+</script>
+</html>

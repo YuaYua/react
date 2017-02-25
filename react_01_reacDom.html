@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+    <div id="wrap"></div>
+</body>
+<script type="text/babel">
+    var names=['ali','npm','kate'];
+    ReactDOM.render(
+            <div>
+                {
+                    names.map(function (name,key) {
+                        return <div key={key}>hello,{name}</div>
+                    })
+                }
+            </div>,
+            document.getElementById('wrap')
+    );
+
+</script>
+</html>
